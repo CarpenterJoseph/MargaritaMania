@@ -4,7 +4,10 @@ self.addEventListener('install', function(e) {
     e.waitUntil(
         caches.open('margarita-mania').then(function(cache) {
             return cache.addAll([
-                //add stuff here \.-.
+                '/MargaritaMania/',
+                '/MargaritaMania/index.html',
+                '/MargaritaMania/index.js',
+                '/MargaritaMania/style.css'
             ]);
         })
     );

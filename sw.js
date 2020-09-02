@@ -1,3 +1,5 @@
+
+
 self.addEventListener('install', function(e) {
     e.waitUntil(
         caches.open('margarita-mania').then(function(cache) {

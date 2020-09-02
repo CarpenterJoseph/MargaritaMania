@@ -2,13 +2,19 @@
   "name": "Margarita Mania - drinks all around!",
   "short_name": "Margarita Mania",
   "description": "Mix drinks together and make fun cocktails!",
-  "icons": [{
+  "icons": [
+    {
     "src": "images/icon.png",
     "sizes": "192x192"
   },
   {
     "src":"images/icon517.png",
     "sizes":"512x512"
+  },
+  {
+    "src":"images/maskable_icon(1).png",
+    "sizes":"512x512",
+    "purpose": "any maskable"
   }
 ],
   "start_url": "./index.html",

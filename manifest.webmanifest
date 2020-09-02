@@ -1,14 +1,15 @@
 {
-  "background_color": "red",
   "name": "Margarita Mania - drinks all around!",
   "short_name": "Margarita Mania",
-  "display": "fullscreen",
   "description": "Mix drinks together and make fun cocktails!",
   "icons": [{
     "src": "images/icon.png",
     "sizes": "192x192"
   }],
-  "start_url": "/index.html"
+  "start_url": "/index.html",
+  "display": "fullscreen",
+  "theme_color": "#B12A34",
+  "background_color": "#B12A34"
 }
   
   

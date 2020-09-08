@@ -9,7 +9,7 @@ self.addEventListener('install', event => {
     // a place to setup the local environment after the installation completes.
     console.log(`Event fired: ${event.type}`);
     console.dir(event);
-    e.waitUntil(
+    event.waitUntil(
         caches.open('margarita-mania').then(function(cache) {
             console.log("Installing: " + cache)
             return cache.addAll([

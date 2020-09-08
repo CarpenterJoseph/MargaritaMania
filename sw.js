@@ -1,5 +1,6 @@
 
 
+
 self.addEventListener('install', event => {
     // fires when the browser installs the app
     // here we're just logging the event and the contents
@@ -8,6 +9,17 @@ self.addEventListener('install', event => {
     // a place to setup the local environment after the installation completes.
     console.log(`Event fired: ${event.type}`);
     console.dir(event);
+    e.waitUntil(
+        caches.open('margarita-mania').then(function(cache) {
+            console.log("Installing: " + cache)
+            return cache.addAll([
+                '/./',
+                '/./index.html',
+                '/./index.js',
+                '/./style.css'
+            ]);
+        })
+    );
 });
 
 self.addEventListener('activate', event => {
@@ -18,6 +30,21 @@ self.addEventListener('activate', event => {
     console.dir(event);
 });
 
+self.addEventListener('fetch', function(e) {
+    console.log('fetching from: ' + e.request.url);
+    e.respondWith(
+        caches.match(e.request).then(function(response) {
+            if(response){
+                console.log("From the cache")
+            }
+            console.log('fetching inside: ' + e.request.url);
+            return response || fetch(e.request);
+        })
+    );
+});
+
+
+/*
 self.addEventListener('fetch', event => {
     // Fires whenever the app requests a resource (file or data)
     // Normally this is where the service worker would check to see
@@ -27,7 +54,7 @@ self.addEventListener('fetch', event => {
     // Go get the requested resource from the network
     event.respondWith(fetch(event.request));
 });
-/*
+
 self.addEventListener('install', function(e) {
     console.log("Installing: " + cache)
     e.waitUntil(
@@ -42,14 +69,5 @@ self.addEventListener('install', function(e) {
         })
     );
 });
-   
-self.addEventListener('fetch', function(e) {
-    console.log('fetching from: ' + e.request.url);
-    e.respondWith(
-        caches.match(e.request).then(function(response) {
-            console.log('fetching inside: ' + e.request.url);
-            return response || fetch(e.request);
-        })
-    );
-});
-*/
+  */ 
+

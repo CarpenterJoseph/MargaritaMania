@@ -1,72 +1,79 @@
-var recipeDB = (function() {
+var recipeDB = (function () {     // This is the variable (recipeDB) that we can use in other files to communicate with the DB
+  var rDB = {};         // This object holds the methods and this is the object we return at the end of the file
+  var datastore = null; // This variable is necessary to use the same datastore through the whole process
 
-var rDB = {};
- var datastore = null;
+  //open connection to indexedDB
+  rDB.open = function () {
+    var request = window.indexedDB.open("recipes", 2);
+
+    //New version - When browser detects new version number, it will  trigger an upgrade needed event.
+    request.onupgradeneeded = function (event) {
+      var db = event.target.result;
+
+      // Delete the old datastore.
+      if (db.objectStoreNames.contains("recipe")) {
+        console.log("Deleting the old databse");
+        db.deleteObjectStore("recipe");
+      }
+
+      // creates the database called "recipe"
+      var store = db.createObjectStore("recipe", { keyPath: "recipeId" });
+
+      // Creates the fields inside the database
+      store.createIndex("Name", "Name", { unique: false });
+      store.createIndex("Description", "Description", { unique: false });
+      store.createIndex("Ingredients", "Ingredients", { unique: false });
+    };
+
+    // This event fires when the database was created successfully
+    request.onsuccess = function (event) {
+      var db = event.target.result;
+
+      console.log("Database: ", db);
+      console.log("Object store names: ", db.objectStoreNames);
+
+      // Get a reference to the DB.
+      datastore = event.target.result;
+    };
+
+    // This event fires when something went wrong while creating the database
+    request.onerror = function (event) {
+      console.log("database-error: ", event.target.error);
+    };
 
 
-//open connection to indexedDB
-rDB.open = function(){
-var request = window.indexedDB.open("recipes", 2);
 
-request.onerror = function(event){
-    console.log("database-error: ", event.target.error);
-};
+  };
 
-request.onsuccess = function(event){
-    var db = event.target.result;
-    
-    console.log("Database: ", db);
-    console.log("Object store names: ", db.objectStoreNames);
-
-
- // Get a reference to the DB.
-    datastore = event.target.result;
-
-    
-};
-
-//New version - When browser detects new version number, it will  trigger an upgrade needed event.
-
-request.onupgradeneeded = function(event){
-var db = event.target.result;
-
-        // Delete the old datastore.
-        if (db.objectStoreNames.contains("recipe")) {
-            console.log("Deleting the old databse");
-            db.deleteObjectStore("recipe");
-          }
-
-
-    var store = db.createObjectStore("recipe", {keyPath: "recipeId"}
-    );
-
-    store.createIndex("Name","Name", {unique:false})
-    store.createIndex("Description", "Description", {unique:false})
-    store.createIndex("Ingredients","Ingredients", {unique:false})
-};
-};
-
-rDB.createRecipe = function(name, description, ingredients){
-    var db = datastore;
+  // This method is responsible to save new data into our database
+  rDB.createRecipe = function (name, description, ingredients, callback) {
+    var db = datastore;  // Here we use the reference we initialised in the open() method to get a connection to the databse
     var date = new Date();
-    var timestamp = date.getTime();
-    
-    var recipeItem = { Name: name, Description: description, Ingredients: ingredients , recipeId: timestamp};
+    var timestamp = date.getTime(); // Time stamp is used as our primary key
+
+    // This is the schema of our data
+    // It has to be an object because only objects can be stored in an IndexedDB
+    var recipeItem = {
+      Name: name,
+      Description: description,
+      Ingredients: ingredients,
+      recipeId: timestamp,
+    };
     // Initiate a new transaction.
     var transaction = db.transaction(["recipe"], "readwrite");
     // Get the datastore.
     var objStore = transaction.objectStore("recipe");
-   
-
-    // Create an object for the todo item.
 
     // Create the datastore request.
     const request = objStore.add(recipeItem);
-    console.log("Object store:" + JSON.stringify(objStore))
+    console.log("Object store:" + JSON.stringify(objStore));
 
     // Handle a successful datastore put.
     request.onsuccess = () => {
-      console.log("Successfully Saved to do item: " + JSON.stringify(recipeItem));
+      console.log(
+        "Successfully Saved to do item: " + JSON.stringify(recipeItem)
+      );
+      callback() // when the saving is successfull it calles the method passed in automatically
     };
 
     // Execute the callback function.
@@ -78,24 +85,32 @@ rDB.createRecipe = function(name, description, ingredients){
     transaction.onerror = () => {
       console.log("Transaction error happened on database");
     };
-}
+  };
 
-rDB.fetchRecipes = function(callback){
+  // This part is responsible for getting all data from the Database
+  rDB.fetchRecipes = function (callback) {
     console.log("Fetching function");
 
-    var db = datastore;
+    var db = datastore;  // We are using the database instance saved in the open() function
     var transaction = db.transaction(["recipe"], "readwrite");
     var objStore = transaction.objectStore("recipe");
 
-    var keyRange = IDBKeyRange.lowerBound(0);
-    var cursorRequest = objStore.openCursor(keyRange);
+    var keyRange = IDBKeyRange.lowerBound(0);         // ??
+    var cursorRequest = objStore.openCursor(keyRange);  // ??
 
+    // This list will hold all the extracted objects from the database
     var recipes = [];
 
+    // This part is essential in returning the data
+    // This function returns the data stored in the "recipes[]" in the form of a callback
+    // That means when we call it we can extract the data with a method (index.js refreshRecipes())
+    // Its also important to point out that this is the oncomplete() event which only fires when
+    // The transaction is over successfully
     transaction.oncomplete = function (e) {
-        callback(recipes);
+      callback(recipes);
     };
 
+    // This is where we extract the data from the database
     cursorRequest.onsuccess = function (e) {
       var result = e.target.result;
 
@@ -109,6 +124,25 @@ rDB.fetchRecipes = function(callback){
     };
 
     cursorRequest.onerror = rDB.onerror;
-}
-return rDB
-})();
+  };
+
+  // This is the delete method that deletes elements from the database by their ID
+  rDB.deleteRecipe = function (id, callback) {
+    console.log("ID to delete: " + id)
+    var db = datastore;
+    var transaction = db.transaction(["recipe"], "readwrite");
+    var objStore = transaction.objectStore("recipe");
+
+    var request = objStore.delete(id);
+
+    request.onsuccess = function (e) {
+      callback();
+    };
+
+    request.onerror = function (e) {
+      console.log(e);
+    };
+  }
+
+  return rDB; // We return the rDB which gives us access to the methods above
+})(); // This means that the file is compiled automatically

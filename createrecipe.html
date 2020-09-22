@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>Margarita Mania - drinks all around!</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="theme-color" content="#B12A34">
+        <link href="style.css" rel="stylesheet">
+        <link rel="manifest" href="manifest.webmanifest">
+        <link rel="apple-touch-icon" href="/icon.png">
+        <script src="index.js" defer></script>
+        <script src="db.js"></script>
+    </head>
+    <body>
+       
+            <!-- Form for new recipe -->
+            <form id="new-recipe-form" method="POST" action="#">
+              <input type="text" name="new-name" id="new-recipe" placeholder="Enter recipe name..." required>
+              <input type="text" name="new-description" id="new-recipe-description" placeholder="Enter a description..." required>
+              <input type="text" name="new-ingredients" id="new-recipe-ingredients" placeholder="add needed ingredients" required>
+              <input type="submit" title="Submit" />
+            </form>
+          
+            <!-- Todo Item List -->
+            <ul id="recipeslist"></ul>
+          
+  
+</body>
+</html>

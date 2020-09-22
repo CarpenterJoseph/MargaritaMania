@@ -1,4 +1,6 @@
-
+window.onload=function(){
+  recipeDB.open()
+}
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {

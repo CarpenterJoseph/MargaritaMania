@@ -5,6 +5,26 @@ OneSignal.push(function() {
     });
 });
 
+OneSignal.push(function() {
+	console.log('test');
+	OneSignal.on('subscriptionChange', function(isSubscribed) {
+	      if (isSubscribed) {
+	      OneSignal.getUserId( function(userId) {
+	        $.ajax({
+	        	type: 'POST',
+	        	data: {
+	        		action: 'savePlayerId',
+	        		id: userId
+	        	},
+	        	success: function(data){
+	        		console.log(data);
+	        	}
+	        });
+             });
+	    }
+     });
+});
+
 
 window.onload = function () {
   recipeDB.open();

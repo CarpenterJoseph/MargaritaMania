@@ -1,3 +1,11 @@
+window.OneSignal = window.OneSignal || [];
+OneSignal.push(function() {
+    OneSignal.init({
+        appId: "e0ffda7d-3642-46f4-bbe1-6cbcec752ba8",
+    });
+});
+
+
 window.onload = function () {
   recipeDB.open();
 

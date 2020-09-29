@@ -1,9 +1,11 @@
-window.OneSignal = window.OneSignal || [];
-OneSignal.push(function() {
-    OneSignal.init({
-        appId: "e0ffda7d-3642-46f4-bbe1-6cbcec752ba8",
-    });
-});
+var OneSignal = window.OneSignal || [];
+if (OneSignal.installServiceWorker) {
+  OneSignal.installServiceWorker();
+} else {
+  if (navigator.serviceWorker) {
+    navigator.serviceWorker.register('/OneSignalSDKWorker.js?appId=e0ffda7d-3642-46f4-bbe1-6cbcec752ba8');
+  }
+}
 
 OneSignal.push(function() {
 	console.log('test');

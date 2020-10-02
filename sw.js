@@ -16,7 +16,9 @@ self.addEventListener('install', event => {
                 '/./',
                 '/./index.html',
                 '/./index.js',
-                '/./style.css'
+                '/./style.css',
+                '/./OneSignalSDKUpdateWorker.js',
+                '/./OneSignailSDKWorker.js'
             ]);
         })
     );

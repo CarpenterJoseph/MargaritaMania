@@ -45,6 +45,18 @@ self.addEventListener('fetch', function(e) {
     );
 });
 
+self.addEventListener("sync", function(event){
+    if (event.tag === "send-messages"){
+        event.waitUntil(function (){
+            var sent = sendMessages();
+            if (sent) {
+                return Promise.resolve();
+            } else {
+                return Promise.reject();
+            }
+        });
+    }
+});
 
 /*
 self.addEventListener('fetch', event => {

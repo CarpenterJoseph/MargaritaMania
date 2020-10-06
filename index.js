@@ -27,6 +27,10 @@ OneSignal.push(function() {
      });
 });
 
+//register sync event
+navigator.serviceWorker.ready.then(function(registration){
+  registration.sync.register('send-messages');
+})
 
 window.onload = function () {
   recipeDB.open();

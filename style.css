@@ -1,5 +1,19 @@
 body{
+    margin: 0 auto;
+    max-width: 100%;
     font-size: 36px;
     font-family: Helvetica,Arial,sans-serif;
     color: #666666;
+}
+nav {
+    min-height: 5%;
+    background-color: #888888;
+    width: 2000px;
+    max-width: 100%;
+    display: block;
+    
+}
+section h1{
+    text-align: center;
+
 }

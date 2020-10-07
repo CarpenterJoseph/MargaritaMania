@@ -10,13 +10,13 @@ self.addEventListener('install', event => {
         caches.open('margarita-mania').then(function(cache) {
             console.log("Installing: " + cache)
             return cache.addAll([
-                '/./',
-                '/./index.html',
-                '/./index.js',
-                '/./createRecipe.js',
-                '/./createrecipe.html',
-                '/./style.css',
-                '/./images/kisspng-margarita-cocktail-mojito-cointreau-martini-margarita-5ac2b8fbd7f542.6731904215227107798846.png'
+               // '/./',
+                './index.html',
+                './index.js',
+                './createRecipe.js',
+                './createrecipe.html',
+                './style.css',
+                './images/drink.png'
             ]);
         })
     );

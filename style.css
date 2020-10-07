@@ -3,3 +3,13 @@ body{
     font-family: Helvetica,Arial,sans-serif;
     color: #666666;
 }
+section {
+    min-height: 5%;
+    background-color: #888888;
+    width: 100%;
+    
+}
+section h1{
+    text-align: center;
+
+}

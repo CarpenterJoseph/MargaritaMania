@@ -45,6 +45,7 @@ self.addEventListener('fetch', function(e) {
     );
 });
 
+//sync event??
 self.addEventListener("sync", function(event){
     if (event.tag === "send-messages"){
         event.waitUntil(function (){

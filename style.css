@@ -9,6 +9,9 @@ body{
 h1 {
     transition: transform .1s;
 }
+a{
+    color: #333333;
+}
 a:hover {
     color: lime;
 }

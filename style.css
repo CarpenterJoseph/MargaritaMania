@@ -13,7 +13,25 @@ nav {
     display: block;
     
 }
-section h1{
+section{
     text-align: center;
 
 }
+.Drinkimg {
+    
+    width: 25%;
+}
+.Drinkimg:hover {
+    animation: bellshake .2s ease-in infinite;
+}
+@keyframes bellshake {
+    0% { transform: rotate(0); }
+    15% { transform: rotate(10deg); }
+    30% { transform: rotate(-10deg); }
+    45% { transform: rotate(8deg); }
+    60% { transform: rotate(-8deg); }
+    75% { transform: rotate(4deg); }
+    85% { transform: rotate(-4deg); }
+    92% { transform: rotate(2deg); }
+    100% { transform: rotate(0); }
+  }

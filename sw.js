@@ -1,6 +1,3 @@
-
-
-
 self.addEventListener('install', event => {
     // fires when the browser installs the app
     // here we're just logging the event and the contents

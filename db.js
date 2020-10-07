@@ -3,7 +3,7 @@ var recipeDB = (function () {     // This is the variable (recipeDB) that we can
   var datastore = null; // This variable is necessary to use the same datastore through the whole process
 
   //open connection to indexedDB
-  rDB.open = function () {
+  rDB.open = function (callback) {
     var request = window.indexedDB.open("recipes", 2);
 
     //New version - When browser detects new version number, it will  trigger an upgrade needed event.
@@ -34,6 +34,8 @@ var recipeDB = (function () {     // This is the variable (recipeDB) that we can
 
       // Get a reference to the DB.
       datastore = event.target.result;
+
+      callback()
     };
 
     // This event fires when something went wrong while creating the database

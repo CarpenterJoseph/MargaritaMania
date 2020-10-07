@@ -9,6 +9,9 @@ body{
 h1 {
     transition: transform .1s;
 }
+h3{
+    margin: 0;
+}
 a{
     color: #333333;
 }
@@ -19,6 +22,7 @@ a:hover {
 h1:hover {
     color: lime;
     transform: scale(1.1);
+    
 }
 
 h2:hover {
@@ -40,15 +44,18 @@ section{
 #title{
     
     font-size: 55px;
-    background-color: lime;
+    background-color:#CFCFCF;
     padding: 50px 0 0 0;
     margin: 0;
    
 }
+#title:hover{
+    background-color: #333333;
+}
 #subtitle{
     
     font-size: 21px;
-    background-color: lime;
+    background-color:#CFCFCF;
     padding: 0 0 25px 0;
     margin: 0;
 }

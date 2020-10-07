@@ -5,6 +5,19 @@ body{
     font-family: Helvetica,Arial,sans-serif;
     color: #666666;
 }
+
+a:hover {
+    color: lime;
+}
+
+h1:hover {
+    color: lime;
+    transform: scale(1.1);
+}
+
+h2:hover {
+    color: lime;
+}
 nav {
     min-height: 5%;
     background-color: #888888;
@@ -23,6 +36,8 @@ section{
 }
 .Drinkimg:hover {
     animation: bellshake .2s ease-in infinite;
+    
+    
 }
 @keyframes bellshake {
     0% { transform: rotate(0); }

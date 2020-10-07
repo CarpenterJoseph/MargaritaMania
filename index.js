@@ -1,4 +1,4 @@
-var OneSignal = window.OneSignal || [];
+/* var OneSignal = window.OneSignal || [];
 if (OneSignal.installServiceWorker) {
   OneSignal.installServiceWorker();
 } else {
@@ -26,7 +26,7 @@ OneSignal.push(function() {
 	    }
      });
 });
-
+*/
 //register sync event
 navigator.serviceWorker.ready.then(function(registration){
   registration.sync.register('send-messages');

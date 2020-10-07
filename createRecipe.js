@@ -40,7 +40,7 @@ window.onload = function () {
         var li = document.createElement("li");
         var span = document.createElement("span");
   
-        var returnString = recipeElement.Name + " - Description: " +  recipeElement.Description + " - Ingredients: " + recipeElement.Ingredients
+        var returnString = "<p><b>Name:</b>"+ recipeElement.Name + "</p> <p><b>Description:</b> " +  recipeElement.Description + "<br> <b>Ingredients:</b> " + recipeElement.Ingredients + "</p>"
         span.innerHTML = returnString
         
         li.appendChild(span);

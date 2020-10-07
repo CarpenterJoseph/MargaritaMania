@@ -59,7 +59,7 @@ section{
 }
 section{
     background-color: #CFFFD4;
-    height: 500px;
+    
 }
 .Drinkimg {
     
@@ -91,13 +91,18 @@ section{
       display:block;
     }
     ul{
-        text-align: none;
+        text-align: left;
         max-width: 100%;
         width: 600px;
         margin: 12px auto;
     }
+    ul li {
+        text-align: left;
+        margin: 12px auto;
+        width: 300px;
+    }
   #recipelist{
       list-style: none;
-      text-align: none;
+      text-align: left;
       margin: 0;
   }

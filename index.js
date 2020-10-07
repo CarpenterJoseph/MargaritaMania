@@ -73,7 +73,7 @@ function refreshRecipes() {
       var li = document.createElement("li");
       var span = document.createElement("span");
 
-      var returnString = recipeElement.Name + " " +  recipeElement.Description + " " + recipeElement.Ingredients
+      var returnString = recipeElement.Name + " Description: " +  recipeElement.Description + " Ingredients: " + recipeElement.Ingredients
       span.innerHTML = returnString
       
       li.appendChild(span);

@@ -1,6 +1,3 @@
-
-
-
 self.addEventListener('install', event => {
     // fires when the browser installs the app
     // here we're just logging the event and the contents
@@ -44,7 +41,7 @@ self.addEventListener('fetch', function(e) {
     );
 });
 
-//sync event??
+/*sync event??
 self.addEventListener("sync", function(event){
     if (event.tag === "send-messages"){
         event.waitUntil(function (){
@@ -57,7 +54,7 @@ self.addEventListener("sync", function(event){
         });
     }
 });
-
+*/
 /*
 self.addEventListener('fetch', event => {
     // Fires whenever the app requests a resource (file or data)

@@ -16,7 +16,7 @@ self.addEventListener('install', event => {
                 '/./createRecipe.js',
                 '/./createRecipe.html',
                 '/./style.css',
-                '/images/kisspng-margarita-cocktail-mojito-cointreau-martini-margarita-5ac2b8fbd7f542.6731904215227107798846.png'
+                '/./images/kisspng-margarita-cocktail-mojito-cointreau-martini-margarita-5ac2b8fbd7f542.6731904215227107798846.png'
             ]);
         })
     );

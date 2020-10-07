@@ -1,8 +1,6 @@
 window.onload = function () {
 
-    recipeDB.open();
-    refreshRecipes();
-
+    recipeDB.open(refreshRecipes);
     var newRecipeForm = document.getElementById("new-recipe-form");
     var newInputName = document.getElementById("new-recipe");
     var newInputDes = document.getElementById("new-recipe-description");
@@ -10,7 +8,7 @@ window.onload = function () {
   
     // Handle new item form submissions.
     newRecipeForm.onsubmit = function (e) {
-      //e.preventDefault();
+      e.preventDefault();
   
       // Get the text.
       var name = newInputName.value;
@@ -22,13 +20,14 @@ window.onload = function () {
       newInputDes.value = "";
       newInputIng.value = "";
   
+      console.log("Name: " + name + " des: " + des)
+
       recipeDB.createRecipe(name, des, ing, refreshRecipes);
       // Don't send the form.
       return false;
     };
   
-    refreshRecipes();
-  };
+};
 
   function refreshRecipes() {
     recipeDB.fetchRecipes(function (recipes) {

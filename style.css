@@ -81,3 +81,23 @@ section{
     92% { transform: rotate(2deg); }
     100% { transform: rotate(0); }
   }
+  ol,ul{
+      padding-left:0;
+    }
+  dd{
+      margin-left:0;
+    }
+  li,main{
+      display:block;
+    }
+    ul{
+        text-align: none;
+        max-width: 100%;
+        width: 600px;
+        margin: 12px auto;
+    }
+  #recipelist{
+      list-style: none;
+      text-align: none;
+      margin: 0;
+  }

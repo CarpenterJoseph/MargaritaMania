@@ -16,7 +16,10 @@ self.addEventListener('install', event => {
                 '/./',
                 '/./index.html',
                 '/./index.js',
-                '/./style.css'
+                '/./style.css',
+                '/./OneSignalSDKUpdateWorker.js',
+                '/./OneSignalSDKWorker.js',
+                '/./images/kisspng-margarita-cocktail-mojito-cointreau-martini-margarita-5ac2b8fbd7f542.6731904215227107798846.png'
             ]);
         })
     );
@@ -43,6 +46,19 @@ self.addEventListener('fetch', function(e) {
     );
 });
 
+//sync event??
+self.addEventListener("sync", function(event){
+    if (event.tag === "send-messages"){
+        event.waitUntil(function (){
+            var sent = sendMessages();
+            if (sent) {
+                return Promise.resolve();
+            } else {
+                return Promise.reject();
+            }
+        });
+    }
+});
 
 /*
 self.addEventListener('fetch', event => {

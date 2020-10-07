@@ -1,9 +1,11 @@
-window.OneSignal = window.OneSignal || [];
-OneSignal.push(function() {
-    OneSignal.init({
-        appId: "e0ffda7d-3642-46f4-bbe1-6cbcec752ba8",
-    });
-});
+var OneSignal = window.OneSignal || [];
+if (OneSignal.installServiceWorker) {
+  OneSignal.installServiceWorker();
+} else {
+  if (navigator.serviceWorker) {
+    navigator.serviceWorker.register('/OneSignalSDKWorker.js?appId=e0ffda7d-3642-46f4-bbe1-6cbcec752ba8');
+  }
+}
 
 OneSignal.push(function() {
 	console.log('test');
@@ -25,6 +27,10 @@ OneSignal.push(function() {
      });
 });
 
+//register sync event
+navigator.serviceWorker.ready.then(function(registration){
+  registration.sync.register('send-messages');
+})
 
 window.onload = function () {
   recipeDB.open();
@@ -67,7 +73,7 @@ function refreshRecipes() {
       var li = document.createElement("li");
       var span = document.createElement("span");
 
-      var returnString = recipeElement.Name + " " +  recipeElement.Description + " " + recipeElement.Ingredients
+      var returnString = recipeElement.Name + " - Description: " +  recipeElement.Description + " - Ingredients: " + recipeElement.Ingredients
       span.innerHTML = returnString
       
       li.appendChild(span);

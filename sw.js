@@ -18,7 +18,8 @@ self.addEventListener('install', event => {
                 '/./index.js',
                 '/./style.css',
                 '/./OneSignalSDKUpdateWorker.js',
-                '/./OneSignalSDKWorker.js'
+                '/./OneSignalSDKWorker.js',
+                '/./images\kisspng-margarita-cocktail-mojito-cointreau-martini-margarita-5ac2b8fbd7f542.6731904215227107798846.png'
             ]);
         })
     );

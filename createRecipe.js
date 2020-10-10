@@ -45,7 +45,9 @@ window.onload = function () {
         checkbox.className = "todo-checkbox";
         checkbox.setAttribute("data-id", recipeElement.recipeId);
   
-        var returnString = "<p><b>Name:</b>"+ recipeElement.Name + "</p> <p><b>Description:</b> " +  recipeElement.Description + "<br> <b>Ingredients:</b> " + recipeElement.Ingredients + "</p>"
+        var returnString = "<p><b>Name:</b>"+ recipeElement.Name + 
+            "</p> <p><b>Description:</b> " +  recipeElement.Description + 
+            "<br> <b>Ingredients:</b> " + recipeElement.Ingredients + "</p>"
         span.innerHTML = returnString
         
         li.appendChild(checkbox)

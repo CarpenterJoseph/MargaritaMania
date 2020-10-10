@@ -39,12 +39,26 @@ window.onload = function () {
   
         var li = document.createElement("li");
         var span = document.createElement("span");
+
+        var checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.className = "todo-checkbox";
+        checkbox.setAttribute("data-id", recipeElement.recipeId);
   
         var returnString = "<p><b>Name:</b>"+ recipeElement.Name + "</p> <p><b>Description:</b> " +  recipeElement.Description + "<br> <b>Ingredients:</b> " + recipeElement.Ingredients + "</p>"
         span.innerHTML = returnString
         
+        li.appendChild(checkbox)
         li.appendChild(span);
         recipeList.appendChild(li);
+
+        checkbox.addEventListener('click', (e) => {
+          var id = parseInt(e.target.getAttribute("data-id"));
+          recipeDB.deleteRecipe(id, () => {
+            refreshRecipes();
+          });
+        });
+
       });
     });
   }

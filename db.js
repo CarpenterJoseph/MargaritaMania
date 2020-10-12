@@ -85,7 +85,7 @@ var recipeDB = (function () {     // This is the variable (recipeDB) that we can
 
     // Handle errors.
     transaction.onerror = () => {
-      console.log("Transaction error happened on database");
+      window.location.href = window.location.hostname + "/offline.html"
     };
   };
 
@@ -142,7 +142,7 @@ var recipeDB = (function () {     // This is the variable (recipeDB) that we can
     };
 
     request.onerror = function (e) {
-      console.log(e);
+      window.location.href = window.location.hostname + "/offline.html"
     };
   }
 

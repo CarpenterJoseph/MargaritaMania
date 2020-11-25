@@ -67,7 +67,7 @@ section{
     width: 25%;
 }
 .Drinkimg:hover {
-    animation: bellshake .2s ease-in infinite;
+    animation: bellshake .10s ease-in infinite;
     
     
 }
@@ -106,4 +106,46 @@ section{
       list-style: none;
       text-align: left;
       margin: 0;
+  }
+  #game-interface {
+      background-color: maroon;
+      width: 100%;
+  
+  }
+  #ingredient-container {
+      display: flex;
+      justify-content: center;
+  }
+
+  #ingredient-container img{
+margin: 20px;
+  }
+
+.ingredient:hover {
+    animation: bellshake .5s ease-in infinite;
+}
+  #shaker-bar {
+      text-align: center;
+  }
+#lime{
+    margin: 10px;
+    margin-right: 60px;
+}
+#shaker:hover {
+    animation: bellshake .5s ease-in-out infinite;
+}
+  #shake-btn{
+      background-color: palegreen;
+      font-size: large;
+      padding: 10px;
+      margin: 50px;
+      width: 25%;
+      border-radius: 20px;
+  }
+#finish{
+    background-color: sienna;
+}
+  #shake-btn:hover {
+    background-color: rgb(0, 243, 0);
+    animation: bellshake .5s ease-in infinite;
   }

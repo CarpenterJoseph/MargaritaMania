@@ -23,6 +23,7 @@ var recipeDB = (function () {     // This is the variable (recipeDB) that we can
       store.createIndex("Name", "Name", { unique: false });
       store.createIndex("Description", "Description", { unique: false });
       store.createIndex("Ingredients", "Ingredients", { unique: false });
+      store.createIndex("Category", "Category", { unique: false });
     };
 
     // This event fires when the database was created successfully
@@ -48,7 +49,7 @@ var recipeDB = (function () {     // This is the variable (recipeDB) that we can
   };
 
   // This method is responsible to save new data into our database
-  rDB.createRecipe = function (name, description, ingredients, callback) {
+  rDB.createRecipe = function (name, description, ingredients, category,callback) {
     var db = datastore;  // Here we use the reference we initialised in the open() method to get a connection to the databse
     var date = new Date();
     var timestamp = date.getTime(); // Time stamp is used as our primary key
@@ -59,6 +60,7 @@ var recipeDB = (function () {     // This is the variable (recipeDB) that we can
       Name: name,
       Description: description,
       Ingredients: ingredients,
+      Category: category,
       recipeId: timestamp,
     };
     // Initiate a new transaction.

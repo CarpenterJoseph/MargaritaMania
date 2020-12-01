@@ -1,20 +1,24 @@
-body{
+body {
     margin: 0 auto;
     max-width: 100%;
     font-size: 21px;
-    font-family: Helvetica,Arial,sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
     color: #666666;
     text-align: center;
 }
+
 h1 {
     transition: transform .1s;
 }
-h3{
+
+h3 {
     margin: 0;
 }
-a{
+
+a {
     color: #333333;
 }
+
 a:hover {
     color: lime;
 }
@@ -22,7 +26,7 @@ a:hover {
 h1:hover {
     color: lime;
     transform: scale(1.1);
-    
+
 }
 
 
@@ -32,120 +36,160 @@ nav {
     background-color: #888888;
     width: 2000px;
     max-width: 100%;
-   
+
     padding: 6px 0 0 0;
-    
+
 }
-section{
+
+section {
     text-align: center;
 }
-#title{
-    
+
+#title {
+
     font-size: 55px;
-    background-color:#CFCFCF;
+    background-color: #CFCFCF;
     padding: 50px 0 0 0;
     margin: 0;
-   
+
 }
-#title:hover{
+
+#title:hover {
     background-color: #333333;
 }
-#subtitle{
-    
+
+#subtitle {
+
     font-size: 21px;
-    background-color:#CFCFCF;
+    background-color: #CFCFCF;
     padding: 0 0 25px 0;
     margin: 0;
 }
-section{
+
+section {
     background-color: #CFFFD4;
     padding-bottom: 50px;
-    
+
 }
+
 .Drinkimg {
-    
+
     width: 25%;
 }
+
 .Drinkimg:hover {
     animation: bellshake .10s ease-in infinite;
-    
-    
-}
-@keyframes bellshake {
-    0% { transform: rotate(0); }
-    15% { transform: rotate(10deg); }
-    30% { transform: rotate(-10deg); }
-    45% { transform: rotate(8deg); }
-    60% { transform: rotate(-8deg); }
-    75% { transform: rotate(4deg); }
-    85% { transform: rotate(-4deg); }
-    92% { transform: rotate(2deg); }
-    100% { transform: rotate(0); }
-  }
-  ol,ul{
-      padding-left:0;
-    }
-  dd{
-      margin-left:0;
-    }
-  li,main{
-      display:block;
-    }
-    ul{
-        text-align: left;
-        max-width: 100%;
-        width: 600px;
-        margin: 12px auto;
-    }
-    ul li {
-        text-align: left;
-        margin: 12px auto;
-        width: 300px;
-    }
-  #recipelist{
-      list-style: none;
-      text-align: left;
-      margin: 0;
-  }
-  #game-interface {
-      background-color: maroon;
-      width: 100%;
-  
-  }
-  #ingredient-container {
-      display: flex;
-      justify-content: center;
-  }
 
-  #ingredient-container img{
-margin: 20px;
-  }
+
+}
+
+@keyframes bellshake {
+    0% {
+        transform: rotate(0);
+    }
+    15% {
+        transform: rotate(10deg);
+    }
+    30% {
+        transform: rotate(-10deg);
+    }
+    45% {
+        transform: rotate(8deg);
+    }
+    60% {
+        transform: rotate(-8deg);
+    }
+    75% {
+        transform: rotate(4deg);
+    }
+    85% {
+        transform: rotate(-4deg);
+    }
+    92% {
+        transform: rotate(2deg);
+    }
+    100% {
+        transform: rotate(0);
+    }
+}
+
+ol, ul {
+    padding-left: 0;
+}
+
+dd {
+    margin-left: 0;
+}
+
+li, main {
+    display: block;
+}
+
+ul {
+    text-align: left;
+    max-width: 100%;
+    width: 600px;
+    margin: 12px auto;
+}
+
+ul li {
+    text-align: left;
+    margin: 12px auto;
+    width: 300px;
+}
+
+#recipelist {
+    list-style: none;
+    text-align: left;
+    margin: 0;
+}
+
+#game-interface {
+    background-color: maroon;
+    width: 100%;
+
+}
+
+#ingredient-container {
+    display: flex;
+    justify-content: center;
+}
+
+#ingredient-container img {
+    margin: 20px;
+}
 
 .ingredient:hover {
     animation: bellshake .5s ease-in infinite;
 }
-  #shaker-bar {
-      text-align: center;
-  }
-#lime{
+
+#shaker-bar {
+    text-align: center;
+}
+
+#lime {
     margin: 10px;
     margin-right: 60px;
 }
+
 #shaker:hover {
     animation: bellshake .5s ease-in-out infinite;
 }
-  #shake-btn{
-      background-color: palegreen;
-      font-size: large;
-      padding: 10px;
-      margin: 50px;
-      width: 25%;
-      border-radius: 20px;
-  }
-#finish{
+
+#shake-btn {
+    background-color: palegreen;
+    font-size: large;
+    padding: 10px;
+    margin: 50px;
+    width: 25%;
+    border-radius: 20px;
+}
+
+#finish {
     background-color: sienna;
 }
-  #shake-btn:hover {
+
+#shake-btn:hover {
     background-color: rgb(0, 243, 0);
     animation: bellshake .5s ease-in infinite;
-  }
+}

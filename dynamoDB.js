@@ -6,6 +6,7 @@ var dynomoDB = (function () {
 	rDynamoDB.postDrink = async function(formData) {
 		const reponse = await fetch('https://t3p39a6dcf.execute-api.eu-central-1.amazonaws.com', {
 			method: 'POST',
+			mode: 'cors',
 			body: JSON.stringify(formData)
 		})
 

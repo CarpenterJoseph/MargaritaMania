@@ -57,10 +57,6 @@ window.onload = function () {
 };
 
 function refreshRecipes() {
-
-	
-
-
 	recipeDB.fetchRecipes(function (recipes) {
 
 		var recipeList = document.getElementById("recipeslist");

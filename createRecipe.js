@@ -1,11 +1,17 @@
 window.onload = function () {
-
-	dynomoDB.getDrinks().then(data => {
-		console.log("The data from AWS: " + data)
+	
+	dynamoDB.getDrinks().then(data => {
+		console.log("The data: " + JSON.stringify(data))
 	})
+	
+// var alcoholFilter = recipelist.filter( recipe => {
+
+//  return recipe.cat.value==="alcoholic"
+    
+//  });
 
 
-	//recipeDB.open(refreshRecipes);
+	recipeDB.open(refreshRecipes);
 	var newRecipeForm = document.getElementById("new-recipe-form");
 	var newInputName = document.getElementById("new-recipe");
 	var newInputDes = document.getElementById("new-recipe-description");
@@ -49,6 +55,9 @@ window.onload = function () {
 		.catch(err => {
 			console.log("ERROR: " + err)
 		})
+
+
+		
 		
 		// Don't send the form.	
 		return false;

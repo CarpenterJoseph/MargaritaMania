@@ -1,6 +1,11 @@
 window.onload = function () {
 
-	recipeDB.open(refreshRecipes);
+	dynomoDB.getDrinks().then(data => {
+		console.log("The data from AWS: " + data)
+	})
+
+
+	//recipeDB.open(refreshRecipes);
 	var newRecipeForm = document.getElementById("new-recipe-form");
 	var newInputName = document.getElementById("new-recipe");
 	var newInputDes = document.getElementById("new-recipe-description");
@@ -27,18 +32,40 @@ window.onload = function () {
 		console.log("Name: " + name + " des: " + des)
 
 		recipeDB.createRecipe(name, des, ing, cat, refreshRecipes);
-		// Don't send the form.
+		
+		var date = new Date();
+		var timestamp = date.getTime(); // Time stamp is used as our primary key
+
+		dynamoDB.postDrink({
+			"title": name,
+			"drinkDescription": des,
+			"ingredients": ing,
+			"category": cat,
+			"id": timestamp
+		})
+		.then(result => {
+			console.log("SUCCESS: " + result)
+		})
+		.catch(err => {
+			console.log("ERROR: " + err)
+		})
+		
+		// Don't send the form.	
 		return false;
 	};
 
 };
 
 function refreshRecipes() {
+
+	
+
+
 	recipeDB.fetchRecipes(function (recipes) {
 
 		var recipeList = document.getElementById("recipeslist");
 		recipeList.innerHTML = "";
-
+		//set recipeslist content
 		recipes.forEach((recipeElement) => {
 
 			var li = document.createElement("li");
@@ -57,7 +84,7 @@ function refreshRecipes() {
 			li.appendChild(checkbox)
 			li.appendChild(span);
 			recipeList.appendChild(li);
-
+		
 			checkbox.addEventListener('click', (e) => {
 				var id = parseInt(e.target.getAttribute("data-id"));
 				recipeDB.deleteRecipe(id, () => {
@@ -68,3 +95,9 @@ function refreshRecipes() {
 		});
 	});
 }
+
+// var alcoholFilter = recipelist.filter(function(recipe){
+
+// 	return recipe.cat.value==="alcoholic"
+	
+// 	});

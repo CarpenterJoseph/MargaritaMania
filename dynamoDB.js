@@ -1,40 +1,29 @@
-//post drink
-//
-// fetch('https://pj0wgp8ipl.execute-api.eu-central-1.amazonaws.com/default/postDrink')
-// 	.then((response) => {
-// 		if(response.status != 200) {
-// 			console.error('oopsie')
-// 			return
-// 		}
-//
-// 		response.json().then((data) => {
-// 			console.log(data)
-// 		})
-// 	})
-// 	.catch((err) => {
-// 		console.log('asdads')
-// 	})
+var dynomoDB = (function () {
+	var rDynamoDB = {}
 
+	//post drink
+	// .then().catch() when implemented
+	rDynamoDB.postDrink = async function(formData) {
+		const reponse = await fetch('https://t3p39a6dcf.execute-api.eu-central-1.amazonaws.com', {
+			method: 'POST',
+			body: JSON.stringify(formData)
+		})
 
+		return response.json()
+	}
 
-//get drink
-//
-fetch('https://ic0g1vv319.execute-api.eu-central-1.amazonaws.com/default/getDrink')
-	.then((response) => {
-		if(response.status != 200) {
-			console.error('oopsie')
-			return
+	//get drink
+	rDynamoDB.getDrinks = function() {
+		fetch('https://bqll1b4dri.execute-api.eu-central-1.amazonaws.com')
+			.then((response) => {
+				if (response.status != 200) {
+					console.error('oopsie')
+					return
+				}
+
+				return response.json();
+			})
 		}
 
-		response.json().then((data) => {
-			console.log(data)
-		})
-	})
-	.catch((err) => {
-		console.log(err)
-	})
-
-
-
-//get drinks
-//https://yfpjb8y63j.execute-api.eu-central-1.amazonaws.com/default/getDrinks
+	return rDynamoDB;
+})();

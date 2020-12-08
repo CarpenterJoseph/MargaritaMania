@@ -12,7 +12,6 @@ var dynamoDB = (function () {
         body: JSON.stringify(formData),
       }
     );
-
     return response.json();
   };
 

@@ -4,13 +4,6 @@ window.onload = function () {
 		console.log("The data: " + JSON.stringify(data))
 	})
 	
-// var alcoholFilter = recipelist.filter( recipe => {
-
-//  return recipe.cat.value==="alcoholic"
-    
-//  });
-
-
 	recipeDB.open(refreshRecipes);
 	var newRecipeForm = document.getElementById("new-recipe-form");
 	var newInputName = document.getElementById("new-recipe");
@@ -68,8 +61,10 @@ window.onload = function () {
 function refreshRecipes() {
 	recipeDB.fetchRecipes(function (recipes) {
 
-		var recipeList = document.getElementById("recipeslist");
-		recipeList.innerHTML = "";
+		var alcoholicList = document.getElementById("Alcoholic-List");
+		var nonAlcoholicList = document.getElementById("Non-alcoholic-List");
+		alcoholicList.innerHTML = "";
+		nonAlcoholicList.innerHTML = "";
 		//set recipeslist content
 		recipes.forEach((recipeElement) => {
 
@@ -88,7 +83,12 @@ function refreshRecipes() {
 
 			li.appendChild(checkbox)
 			li.appendChild(span);
-			recipeList.appendChild(li);
+
+			if(recipeElement.Category === 'alcoholic'){
+				alcoholicList.appendChild(li)
+			}else {
+				nonAlcoholicList.appendChild(li)
+			}
 		
 			checkbox.addEventListener('click', (e) => {
 				var id = parseInt(e.target.getAttribute("data-id"));

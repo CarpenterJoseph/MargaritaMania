@@ -4,7 +4,7 @@ var dynamoDB = (function () {
   //post drink
   // .then().catch() when implemented
   rDynamoDB.postDrink = async function (formData) {
-    const reponse = await fetch(
+    const response = await fetch(
       " https://t3p39a6dcf.execute-api.eu-central-1.amazonaws.com/default/postDrink",
       {
         method: "POST",

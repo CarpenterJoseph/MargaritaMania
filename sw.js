@@ -13,7 +13,9 @@ self.addEventListener('install', event => {
 				'./createRecipe.js',
 				'./createrecipe.html',
 				'./style.css',
-				'./images/drink.png'
+				'./images/drink.png',
+				'./dynamoDB.js',
+				'./db.js',
 			]);
 		})
 	);

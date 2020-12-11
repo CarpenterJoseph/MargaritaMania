@@ -54,11 +54,11 @@ function refillLocalDB(recipes){
 }
 
 function refreshRecipes() {
-
 	dynamoDB.getDrinks()
 	.then(drinks => {
 		var recipeList = document.getElementById("recipeslist");
 		recipeList.innerHTML = "";
+
 		//set recipeslist content
 		drinks.forEach((recipeElement) => {
 			console.log("Element: " + JSON.stringify(recipeElement))
@@ -78,9 +78,11 @@ function refreshRecipes() {
 			li.appendChild(checkbox)
 			li.appendChild(span);
 
-			
-
-			recipeList.appendChild(li);
+			if(recipeElement.Category === 'alcoholic'){
+				alcoholicList.appendChild(li)
+			}else {
+				nonAlcoholicList.appendChild(li)
+			}
 		
 			checkbox.addEventListener('click', (e) => {
 				var id = parseInt(e.target.getAttribute("data-id"));

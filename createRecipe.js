@@ -1,16 +1,11 @@
 window.onload = function () {
-	
-	dynamoDB.getDrinks().then(data => {
-		console.log("The data: " + JSON.stringify(data))
-	})
-	
+
 	recipeDB.open(refreshRecipes);
 	var newRecipeForm = document.getElementById("new-recipe-form");
 	var newInputName = document.getElementById("new-recipe");
 	var newInputDes = document.getElementById("new-recipe-description");
 	var newInputIng = document.getElementById("new-recipe-ingredients");
 	var newInputCat = document.getElementById("new-recipe-category");
-
 
 	// Handle new item form submissions.
 	newRecipeForm.onsubmit = function (e) {
@@ -31,7 +26,7 @@ window.onload = function () {
 		console.log("Name: " + name + " des: " + des)
 
 		recipeDB.createRecipe(name, des, ing, cat, refreshRecipes);
-		
+
 		var date = new Date();
 		var timestamp = date.getTime(); // Time stamp is used as our primary key
 
@@ -41,40 +36,39 @@ window.onload = function () {
 			"ingredients": ing,
 			"category": cat,
 			"id": timestamp
-		})
-		.then(result => {
+		}).then(result => {
 			console.log("SUCCESS: " + result)
-		})
-		.catch(err => {
+		}).catch(err => {
 			console.log("ERROR: " + err)
 		})
-
-
-		
-		
 		// Don't send the form.	
 		return false;
 	};
 
 };
 
+
+function refillLocalDB(recipes){
+	
+	return recipes
+}
+
 function refreshRecipes() {
-	recipeDB.fetchRecipes(function (recipes) {
+	dynamoDB.getDrinks()
+	.then(drinks => {
+		var recipeList = document.getElementById("recipeslist");
+		recipeList.innerHTML = "";
 
-		var alcoholicList = document.getElementById("Alcoholic-List");
-		var nonAlcoholicList = document.getElementById("Non-alcoholic-List");
-		alcoholicList.innerHTML = "";
-		nonAlcoholicList.innerHTML = "";
 		//set recipeslist content
-		recipes.forEach((recipeElement) => {
-
+		drinks.forEach((recipeElement) => {
+			console.log("Element: " + JSON.stringify(recipeElement))
 			var li = document.createElement("li");
 			var span = document.createElement("span");
 
 			var checkbox = document.createElement("input");
 			checkbox.type = "checkbox";
 			checkbox.className = "todo-checkbox";
-			checkbox.setAttribute("data-id", recipeElement.recipeId);
+			checkbox.setAttribute("data-id", recipeElement.recipeID);
 
 			var returnString = "<p><b>Name:</b>" + recipeElement.Name +
 				"</p> <p><b>Description:</b> " + recipeElement.Description +
@@ -96,8 +90,43 @@ function refreshRecipes() {
 					refreshRecipes();
 				});
 			});
+	})
+	.catch(err => {
+		console.log(`Error occured while fetching: ${err}`)
+	})
 
-		});
+	// recipeDB.fetchRecipes(function (recipes) {
+
+	// 	var recipeList = document.getElementById("recipeslist");
+	// 	recipeList.innerHTML = "";
+	// 	//set recipeslist content
+	// 	recipes.forEach((recipeElement) => {
+
+	// 		var li = document.createElement("li");
+	// 		var span = document.createElement("span");
+
+	// 		var checkbox = document.createElement("input");
+	// 		checkbox.type = "checkbox";
+	// 		checkbox.className = "todo-checkbox";
+	// 		checkbox.setAttribute("data-id", recipeElement.recipeId);
+
+	// 		var returnString = "<p><b>Name:</b>" + recipeElement.Name +
+	// 			"</p> <p><b>Description:</b> " + recipeElement.Description +
+	// 			"<br> <b>Ingredients:</b> " + recipeElement.Ingredients + "</p>"
+	// 		span.innerHTML = returnString
+
+	// 		li.appendChild(checkbox)
+	// 		li.appendChild(span);
+	// 		recipeList.appendChild(li);
+		
+	// 		checkbox.addEventListener('click', (e) => {
+	// 			var id = parseInt(e.target.getAttribute("data-id"));
+	// 			recipeDB.deleteRecipe(id, () => {
+	// 				refreshRecipes();
+	// 			});
+	// 		});
+
+	// 	});
 	});
 }
 

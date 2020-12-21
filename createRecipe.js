@@ -48,7 +48,6 @@ window.onload = function () {
   };
 };
 
-<<<<<<< HEAD
 function refillLocalDB() {
   dynamoDB.getDrinks().then((drinks) => {
 

@@ -52,9 +52,11 @@ window.onload = function () {
 
 function refillLocalDB() {
   dynamoDB.getDrinks().then((drinks) => {
+	recipeDB.clearDatabase()
     recipeDB.fetchRecipes(function (recipes) {
       for (let index = 0; index < drinks.length; index++) {
-        const localRecipes = [];
+		const localRecipes = [];
+		const cloudIds = []
         recipes.forEach((recipe) => localRecipes.push({ id: recipe.recipeId }));
 
         if (!localRecipes.find((item) => item.id == drinks[index].recipeID)) {

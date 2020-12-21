@@ -28,11 +28,11 @@ var dynamoDB = (function () {
   //https://zdv7bwlf34.execute-api.eu-central-1.amazonaws.com
   rDynamoDB.deleteDrink = async function(id){
     const response = await fetch(
-      "https://zdv7bwlf34.execute-api.eu-central-1.amazonaws.com",
+      "https://zdv7bwlf34.execute-api.eu-central-1.amazonaws.com/default/deleteDrink",
       {
         method: "POST",
         mode: "cors",
-        body: JSON.stringify(id)
+        body: JSON.stringify({id: id})
       }
     )
     return response

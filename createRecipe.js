@@ -48,9 +48,12 @@ window.onload = function () {
   };
 };
 
+<<<<<<< HEAD
 function refillLocalDB() {
   dynamoDB.getDrinks().then((drinks) => {
+
     recipeDB.fetchRecipes(function (recipes) {
+
       for (let index = 0; index < drinks.length; index++) {
         const localRecipes = [];
         recipes.forEach((recipe) => localRecipes.push({ id: recipe.recipeId }));
@@ -75,12 +78,13 @@ function refillLocalDB() {
 function refreshRecipes() {
   refillLocalDB();
 
-  dynamoDB.getDrinks().then((drinks) => {
-    var recipeList = document.getElementById("recipeslist");
-    recipeList.innerHTML = "";
-
+  recipeDB.fetchRecipes(function (recipes) {
+    var alcoholicList = document.getElementById("Alcoholic-List");
+    alcoholicList.innerHTML = "";
+    var non_alcoholicList = document.getElementById("Non-alcoholic-List");
+    non_alcoholicList.innerHTML = "";
     //set recipeslist content
-    drinks
+    recipes
       .forEach((recipeElement) => {
         console.log("Element: " + JSON.stringify(recipeElement));
         var li = document.createElement("li");
@@ -107,7 +111,7 @@ function refreshRecipes() {
         if (recipeElement.Category === "alcoholic") {
           alcoholicList.appendChild(li);
         } else {
-          nonAlcoholicList.appendChild(li);
+          non_alcoholicList.appendChild(li);
         }
 
         checkbox.addEventListener("click", (e) => {
@@ -120,5 +124,7 @@ function refreshRecipes() {
       .catch((err) => {
         console.log(`Error occured while fetching: ${err}`);
       });
+
   });
 }
+

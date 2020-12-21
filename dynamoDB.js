@@ -24,5 +24,19 @@ var dynamoDB = (function () {
     return response.json();
   };
 
+  //delete drink
+  //https://zdv7bwlf34.execute-api.eu-central-1.amazonaws.com
+  rDynamoDB.deleteDrink = async function(id){
+    const response = await fetch(
+      "https://zdv7bwlf34.execute-api.eu-central-1.amazonaws.com",
+      {
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify(id)
+      }
+    )
+    return response
+  }
+
   return rDynamoDB;
 })();

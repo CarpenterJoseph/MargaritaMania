@@ -48,12 +48,33 @@ window.onload = function () {
 };
 
 
-function refillLocalDB(recipes){
+function refillLocalDB(){
+	dynamoDB.getDrinks()
+	.then(drinks => {
+
+		recipeDB.fetchRecipes(function (recipes) {
+			for (let index = 0; index < drinks.length; index++) {
+				const localRecipes = []
+				recipes.forEach(recipe => localRecipes.push({id: recipe.recipeId}))
+				
+				if (!localRecipes.find(item => item.id == drinks[index].recipeID)) {
+					var drink = drinks[index]
+					
+					recipeDB.createRecipeWithId(drink.recipeID, drink.Name, drink.Description, 
+						drink.Ingredients, drink.Category, function(){})
+				}
+
+			}
+		})
+	})
 	
-	return recipes
 }
 
 function refreshRecipes() {
+
+	refillLocalDB()
+
+
 	dynamoDB.getDrinks()
 	.then(drinks => {
 		var recipeList = document.getElementById("recipeslist");
@@ -130,8 +151,3 @@ function refreshRecipes() {
 	});
 }
 
-// var alcoholFilter = recipelist.filter(function(recipe){
-
-// 	return recipe.cat.value==="alcoholic"
-	
-// 	});

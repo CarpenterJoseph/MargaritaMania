@@ -24,12 +24,14 @@ window.onload = function () {
 
     console.log("Name: " + name + " des: " + des);
 
-    recipeDB.createRecipe(name, des, ing, cat, refreshRecipes);
+   
 
     var date = new Date();
-    var timestamp = date.getTime(); // Time stamp is used as our primary key
-
-    dynamoDB
+	var timestamp = date.getTime(); // Time stamp is used as our primary key
+	
+	recipeDB.createRecipeWithId(timestamp, name, des, ing, cat, refreshRecipes);
+	
+	dynamoDB
       .postDrink({
         title: name,
         drinkDescription: des,
@@ -50,9 +52,7 @@ window.onload = function () {
 
 function refillLocalDB() {
   dynamoDB.getDrinks().then((drinks) => {
-
     recipeDB.fetchRecipes(function (recipes) {
-
       for (let index = 0; index < drinks.length; index++) {
         const localRecipes = [];
         recipes.forEach((recipe) => localRecipes.push({ id: recipe.recipeId }));
@@ -92,7 +92,7 @@ function refreshRecipes() {
         var checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.className = "todo-checkbox";
-        checkbox.setAttribute("data-id", recipeElement.recipeID);
+        checkbox.setAttribute("data-id", recipeElement.recipeId);
 
         var returnString =
           "<p><b>Name:</b>" +
@@ -114,16 +114,16 @@ function refreshRecipes() {
         }
 
         checkbox.addEventListener("click", (e) => {
-          var id = parseInt(e.target.getAttribute("data-id"));
-          recipeDB.deleteRecipe(id, () => {
+		  var id = parseInt(e.target.getAttribute("data-id"));
+		  console.log("ID to delete: " + id)
+		  dynamoDB.deleteDrink(id)
+		  .then(res => {
+			  recipeDB.deleteRecipe(id, () => {
             refreshRecipes();
           });
+		  })
+          
         });
       })
-      .catch((err) => {
-        console.log(`Error occured while fetching: ${err}`);
-      });
-
   });
 }
-

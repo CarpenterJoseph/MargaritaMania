@@ -122,7 +122,7 @@ function refreshRecipes() {
 					"<br> <b>Ingredients:</b> " +
 					recipeElement.Ingredients +
 					"</p>" +
-					`<img src=\'${recipeElement.Image}\'>`;
+					`<img src='${recipeElement.Image}'>`;
 				span.innerHTML = returnString;
 
 				li.appendChild(checkbox);

@@ -5,26 +5,26 @@ let Sign_url = "";
 let file = "";
 
 async function uploadPicture(file, album) {
-    console.log(file, album);
-  // Get Signed URL
-  const body = {key: file.name, type: "image/jpeg", album: album}; 
-  const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"    
-      },
-      body: JSON.stringify(body)
-  }
-  const rawResponse = await fetch(SIGNED_S3_URL_FUNCTION, options);
-    const data = await rawResponse.json();
-    console.log("signedUrl", data.url);
-    console.log(data);
-    Sign_url= data.url;
-    Img_url = data.photoURL;
+	console.log(file, album);
+	// Get Signed URL
+	const body = {key: file.name, type: "image/jpeg", album: album};
+	const options = {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(body)
+	}
+	const rawResponse = await fetch(SIGNED_S3_URL_FUNCTION, options);
+	const data = await rawResponse.json();
+	console.log("signedUrl", data.url);
+	console.log(data);
+	Sign_url = data.url;
+	Img_url = data.photoURL;
 
 }
 
 function handleFileChange(event) {
-    file = (event.target.file[0]);
+	file = (event.target.file[0]);
 
 }

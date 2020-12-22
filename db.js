@@ -25,6 +25,7 @@ var recipeDB = (function () {
 			store.createIndex("Description", "Description", {unique: false});
 			store.createIndex("Ingredients", "Ingredients", {unique: false});
 			store.createIndex("Category", "Category", {unique: false});
+			store.createIndex("Image", "Image", {unique: false});
 		};
 
 		// This event fires when the database was created successfully
@@ -53,6 +54,7 @@ var recipeDB = (function () {
 		description,
 		ingredients,
 		category,
+		imageURL,
 		callback
 	) {
 		var db = datastore; // Here we use the reference we initialised in the open() method to get a connection to the databse
@@ -65,6 +67,7 @@ var recipeDB = (function () {
 			Ingredients: ingredients,
 			Category: category,
 			recipeId: id,
+			Image: imageURL
 		};
 		// Initiate a new transaction.
 		var transaction = db.transaction(["recipe"], "readwrite");

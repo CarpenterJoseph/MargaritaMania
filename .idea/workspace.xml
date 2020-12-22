@@ -23,7 +23,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bucket.js" beforeDir="false" afterPath="$PROJECT_DIR$/bucket.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/createRecipe.js" beforeDir="false" afterPath="$PROJECT_DIR$/createRecipe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/createrecipe.html" beforeDir="false" afterPath="$PROJECT_DIR$/createrecipe.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/db.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -82,7 +81,7 @@
       <updated>1601360745378</updated>
       <workItem from="1601360746793" duration="1441000" />
       <workItem from="1608563455086" duration="6513000" />
-      <workItem from="1608654915918" duration="2068000" />
+      <workItem from="1608654915918" duration="7047000" />
     </task>
     <servers />
   </component>

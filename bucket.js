@@ -17,9 +17,25 @@ async function uploadPicture(file) {
 	}
 	const rawResponse = await fetch(SIGNED_S3_URL_FUNCTION, options);
 	const data = await rawResponse.json();
-	console.log("signedUrl", data.url);
-	console.log("photoUrl", data.photoURL);
+	//console.log("signedUrl", data.url);
+	//console.log("photoUrl", data.photoURL);
 	signURL = data.url;
 	imageURL = data.photoURL;
+
+	// After you obtain the signedUrl, you upload the file directly as the body.
+	try {
+		const res = await fetch(signURL, {
+			method: "PUT",
+			mode: "cors",
+			headers: {
+				"Content-Type": "image/jpeg"
+			},
+			body: file
+		});
+		const text = await res.text();
+	} catch (e) {
+		console.error(e);
+	}
+	return imageURL
 }
 

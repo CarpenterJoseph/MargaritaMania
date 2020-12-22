@@ -1,3 +1,5 @@
+var reader  = new FileReader();
+
 window.onload = function () {
   recipeDB.open(refreshRecipes);
   var newRecipeForm = document.getElementById("new-recipe-form");
@@ -10,17 +12,39 @@ window.onload = function () {
   newRecipeForm.onsubmit = function (e) {
     e.preventDefault();
 
+	let preview = ""
+
     // Get the text.
     var name = newInputName.value;
     var des = newInputDes.value;
     var ing = newInputIng.value;
     var cat = newInputCat.value;
+var file = document.querySelector('input[type=file]').files[0];
+
+reader.onloaded = function () {​​
+
+    preview = reader.result;
+
+  }​​
+
+if (file) {​​
+
+    reader.readAsDataURL(file);  
+
+    console.log("File read in: " + preview)
+
+  }​​ else {​​
+
+    preview = "";
+
+  }​​
 
     // Reset the input field.
     newInputName.value = "";
     newInputDes.value = "";
     newInputIng.value = "";
     newInputCat.value = "";
+
 
     console.log("Name: " + name + " des: " + des);
 

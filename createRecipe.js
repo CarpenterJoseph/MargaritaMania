@@ -21,24 +21,24 @@ window.onload = function () {
 		var cat = newInputCat.value;
 		var file = document.querySelector('input[type=file]').files[0];
 
-		reader.onloaded = function () {​​
+		reader.onloaded = function () {
 
     preview = reader.result;
 
-		}​​
+		}
 
-if (file) {​​
+if (file) {
 
     reader.readAsDataURL(file);
 
 	console.log("File read in: " + preview)
 
-}​​ else
-		{​​
+} else
+		{
 
     preview = "";
 
-		}​​
+		}
 
 		// Reset the input field.
 		newInputName.value = "";

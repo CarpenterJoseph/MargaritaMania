@@ -1,5 +1,3 @@
-var reader = new FileReader();
-
 let uploadFile = null
 
 window.onload = function () {
@@ -14,27 +12,40 @@ window.onload = function () {
 	newRecipeForm.onsubmit = function (e) {
 		e.preventDefault();
 
-		uploadPicture(uploadFile)
+		let date = new Date();
+		let timestamp = date.getTime(); // Time stamp is used as our primary key
 
-		let preview = ""
 
 		// Get the text.
-		var name = newInputName.value;
-		var des = newInputDes.value;
-		var ing = newInputIng.value;
-		var cat = newInputCat.value;
+		let name = newInputName.value;
+		let des = newInputDes.value;
+		let ing = newInputIng.value;
+		let cat = newInputCat.value;
+		let imageURL = ""
 
-		reader.onloadend = function () {
-			preview = reader.result;
-			//console.log(preview)
-		}
+		//upload picture to s3 bucket then upload drink to db with imageurl
+		uploadPicture(uploadFile).then(r => {
+			imageURL = r
+			dynamoDB
+				.postDrink({
+					title: name,
+					drinkDescription: des,
+					ingredients: ing,
+					category: cat,
+					id: timestamp,
+					imgPath: imageURL
+				})
+				.then((result) => {
+					//console.log("SUCCESS: " + result);
+				})
+				.catch((err) => {
+					//console.log("ERROR: " + err);
+				});
 
-		if (uploadFile) {
-			reader.readAsDataURL(uploadFile);
-			//console.log("File read in: " + preview)
-		} else {
-			preview = "";
-		}
+			//save drink to localdb
+			recipeDB.createRecipeWithId(timestamp, name, des, ing, cat, imageURL, refreshRecipes);
+		})
+
 
 
 
@@ -45,28 +56,7 @@ window.onload = function () {
 		newInputCat.value = "";
 
 
-		//console.log("Name: " + name + " des: " + des);
 
-
-		var date = new Date();
-		var timestamp = date.getTime(); // Time stamp is used as our primary key
-
-		recipeDB.createRecipeWithId(timestamp, name, des, ing, cat, refreshRecipes);
-
-		dynamoDB
-			.postDrink({
-				title: name,
-				drinkDescription: des,
-				ingredients: ing,
-				category: cat,
-				id: timestamp,
-			})
-			.then((result) => {
-				//console.log("SUCCESS: " + result);
-			})
-			.catch((err) => {
-				//console.log("ERROR: " + err);
-			});
 		// Don't send the form.
 		return false;
 	};
@@ -94,6 +84,7 @@ function refillLocalDB() {
 						drink.Description,
 						drink.Ingredients,
 						drink.Category,
+						drink.Image,
 						function () {
 						}
 					);
@@ -130,7 +121,8 @@ function refreshRecipes() {
 					recipeElement.Description +
 					"<br> <b>Ingredients:</b> " +
 					recipeElement.Ingredients +
-					"</p>";
+					"</p>" +
+					`<img src=\'${recipeElement.Image}\'>`;
 				span.innerHTML = returnString;
 
 				li.appendChild(checkbox);

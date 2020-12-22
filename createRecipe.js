@@ -1,5 +1,7 @@
 var reader = new FileReader();
 
+let uploadFile = null
+
 window.onload = function () {
 	recipeDB.open(refreshRecipes);
 	var newRecipeForm = document.getElementById("new-recipe-form");
@@ -12,6 +14,8 @@ window.onload = function () {
 	newRecipeForm.onsubmit = function (e) {
 		e.preventDefault();
 
+		uploadPicture(uploadFile)
+
 		let preview = ""
 
 		// Get the text.
@@ -19,26 +23,20 @@ window.onload = function () {
 		var des = newInputDes.value;
 		var ing = newInputIng.value;
 		var cat = newInputCat.value;
-		var file = document.querySelector('input[type=file]').files[0];
 
-		reader.onloaded = function () {
-
-    preview = reader.result;
-
+		reader.onloadend = function () {
+			preview = reader.result;
+			//console.log(preview)
 		}
 
-if (file) {
-
-    reader.readAsDataURL(file);
-
-	console.log("File read in: " + preview)
-
-} else
-		{
-
-    preview = "";
-
+		if (uploadFile) {
+			reader.readAsDataURL(uploadFile);
+			//console.log("File read in: " + preview)
+		} else {
+			preview = "";
 		}
+
+
 
 		// Reset the input field.
 		newInputName.value = "";
@@ -47,7 +45,7 @@ if (file) {
 		newInputCat.value = "";
 
 
-		console.log("Name: " + name + " des: " + des);
+		//console.log("Name: " + name + " des: " + des);
 
 
 		var date = new Date();
@@ -64,15 +62,19 @@ if (file) {
 				id: timestamp,
 			})
 			.then((result) => {
-				console.log("SUCCESS: " + result);
+				//console.log("SUCCESS: " + result);
 			})
 			.catch((err) => {
-				console.log("ERROR: " + err);
+				//console.log("ERROR: " + err);
 			});
 		// Don't send the form.
 		return false;
 	};
 };
+
+function handleFileChange(event) {
+	uploadFile = (event.files[0]);
+}
 
 function refillLocalDB() {
 	dynamoDB.getDrinks().then((drinks) => {
@@ -112,7 +114,7 @@ function refreshRecipes() {
 		//set recipeslist content
 		recipes
 			.forEach((recipeElement) => {
-				console.log("Element: " + JSON.stringify(recipeElement));
+				//console.log("Element: " + JSON.stringify(recipeElement));
 				var li = document.createElement("li");
 				var span = document.createElement("span");
 
@@ -142,7 +144,7 @@ function refreshRecipes() {
 
 				checkbox.addEventListener("click", (e) => {
 					var id = parseInt(e.target.getAttribute("data-id"));
-					console.log("ID to delete: " + id)
+					//console.log("ID to delete: " + id)
 					dynamoDB.deleteDrink(id)
 						.then(res => {
 							recipeDB.deleteRecipe(id, () => {

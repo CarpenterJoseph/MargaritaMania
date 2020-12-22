@@ -21,6 +21,10 @@
   <component name="ChangeListManager">
     <list default="true" id="115962d5-704c-48c4-89e8-352729c1e1b8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bucket.js" beforeDir="false" afterPath="$PROJECT_DIR$/bucket.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/createRecipe.js" beforeDir="false" afterPath="$PROJECT_DIR$/createRecipe.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/createrecipe.html" beforeDir="false" afterPath="$PROJECT_DIR$/createrecipe.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/db.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,13 +58,17 @@
       <recent name="C:\Users\Joe\Documents\GitHub\MargaritaMania" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JavaScript Debug.index.html">
+    <configuration name="createrecipe.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/MargaritaMania/createrecipe.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63343/MargaritaMania/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="JavaScript Debug.index.html" />
+        <item itemvalue="JavaScript Debug.createrecipe.html" />
       </list>
     </recent_temporary>
   </component>
@@ -74,6 +82,7 @@
       <updated>1601360745378</updated>
       <workItem from="1601360746793" duration="1441000" />
       <workItem from="1608563455086" duration="6513000" />
+      <workItem from="1608654915918" duration="2068000" />
     </task>
     <servers />
   </component>

@@ -13,7 +13,7 @@ var recipeDB = (function () {
 
 			// Delete the old datastore.
 			if (db.objectStoreNames.contains("recipe")) {
-				console.log("Deleting the old databse");
+				//console.log("Deleting the old databse");
 				db.deleteObjectStore("recipe");
 			}
 
@@ -31,8 +31,8 @@ var recipeDB = (function () {
 		request.onsuccess = function (event) {
 			var db = event.target.result;
 
-			console.log("Database: ", db);
-			console.log("Object store names: ", db.objectStoreNames);
+			//console.log("Database: ", db);
+			//console.log("Object store names: ", db.objectStoreNames);
 
 			// Get a reference to the DB.
 			datastore = event.target.result;
@@ -42,7 +42,7 @@ var recipeDB = (function () {
 
 		// This event fires when something went wrong while creating the database
 		request.onerror = function (event) {
-			console.log("database-error: ", event.target.error);
+			//console.log("database-error: ", event.target.error);
 		};
 	};
 
@@ -73,19 +73,19 @@ var recipeDB = (function () {
 
 		// Create the datastore request.
 		const request = objStore.add(recipeItem);
-		console.log("Object store:" + JSON.stringify(objStore));
+		//console.log("Object store:" + JSON.stringify(objStore));
 
 		// Handle a successful datastore put.
 		request.onsuccess = () => {
-			console.log(
-				"Successfully Saved to do item: " + JSON.stringify(recipeItem)
-			);
+			//console.log(
+			//	"Successfully Saved to do item: " + JSON.stringify(recipeItem)
+			//);
 			callback(); // when the saving is successfull it calles the method passed in automatically
 		};
 
 		// Execute the callback function.
 		transaction.oncomplete = () => {
-			console.log("Transaction completed on the database");
+			//console.log("Transaction completed on the database");
 		};
 
 		// Handle errors.
@@ -96,7 +96,7 @@ var recipeDB = (function () {
 
 	// This part is responsible for getting all data from the Database
 	rDB.fetchRecipes = function (callback) {
-		console.log("Fetching function");
+		//console.log("Fetching function");
 
 		var db = datastore; // We are using the database instance saved in the open() function
 		var transaction = db.transaction(["recipe"], "readwrite");
@@ -135,7 +135,7 @@ var recipeDB = (function () {
 
 	// This part is responsible for getting all data from the Database
 	rDB.fetchRecipes = function (callback) {
-		console.log("Fetching function");
+		//console.log("Fetching function");
 
 		var db = datastore; // We are using the database instance saved in the open() function
 		var transaction = db.transaction(["recipe"], "readwrite");
@@ -174,7 +174,7 @@ var recipeDB = (function () {
 
 	// This is the delete method that deletes elements from the database by their ID
 	rDB.deleteRecipe = function (id, callback) {
-		console.log("ID to delete: " + id);
+		//console.log("ID to delete: " + id);
 		var db = datastore;
 		var transaction = db.transaction(["recipe"], "readwrite");
 		var objStore = transaction.objectStore("recipe");
@@ -196,7 +196,7 @@ var recipeDB = (function () {
 			.objectStore("recipe")
 			.clear();
 		request.onsuccess = function (event) {
-			console.log("Data deleted")
+			//console.log("Data deleted")
 		};
 	};
 

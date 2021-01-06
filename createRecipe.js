@@ -65,13 +65,17 @@ window.onload = function () {
 };
 
 function handleFileChange(event) {
+	//Getting the first file
   uploadFile = event.files[0];
 }
 
 //Syncs the localDB with The Dynamo DB - The newest data
 function refillLocalDB() {
   dynamoDB.getDrinks().then(() => {
-    recipeDB.clearDatabase();
+	  //When it gets the latest drinks, it clears the indexed DB
+	recipeDB.clearDatabase();
+	
+	//Inputs the newest recipes from Dynamo DB
     recipeDB.createRecipeWithId(
       drink.recipeID,
       drink.Name,
@@ -85,16 +89,22 @@ function refillLocalDB() {
 }
 
 function refreshRecipes() {
+
+	//Runs the refill db functions
   refillLocalDB();
 
   recipeDB.fetchRecipes(function (recipes) {
+
+	//Storing the lists for future use. 
     var alcoholicList = document.getElementById("Alcoholic-List");
     alcoholicList.innerHTML = "";
     var non_alcoholicList = document.getElementById("Non-alcoholic-List");
     non_alcoholicList.innerHTML = "";
-    //set recipeslist content
+    //set recipeslist content - How the recipees should be rendered in the frontend
     recipes.forEach((recipeElement) => {
-      //console.log("Element: " + JSON.stringify(recipeElement));
+	  //console.log("Element: " + JSON.stringify(recipeElement));
+	  
+
       var li = document.createElement("li");
       var span = document.createElement("span");
 
@@ -117,17 +127,23 @@ function refreshRecipes() {
       li.appendChild(checkbox);
       li.appendChild(span);
 
+	  //We check the category value from the recipee element and divide them
       if (recipeElement.Category === "alcoholic") {
         alcoholicList.appendChild(li);
       } else {
         non_alcoholicList.appendChild(li);
       }
 
+	  //Eventlistener for click box for each recipee
       checkbox.addEventListener("click", (e) => {
         var id = parseInt(e.target.getAttribute("data-id"));
-        //console.log("ID to delete: " + id)
+		//console.log("ID to delete: " + id)
+		
+		//Gets the recipee id and deletes it from the DB
         dynamoDB.deleteDrink(id).then((res) => {
           recipeDB.deleteRecipe(id, () => {
+
+			//Refreshes the recipee list afte deletion
             refreshRecipes();
           });
         });

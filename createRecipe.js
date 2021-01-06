@@ -66,10 +66,17 @@ function handleFileChange(event) {
 	uploadFile = (event.files[0]);
 }
 
+//Syncs the localDB with The Dynamo DB - The newest data
 function refillLocalDB() {
+
+	//get drinks
 	dynamoDB.getDrinks().then((drinks) => {
+
+		//when drinks has been recieved - clear the Local DB
 		recipeDB.clearDatabase()
+
 		recipeDB.fetchRecipes(function (recipes) {
+
 			for (let index = 0; index < drinks.length; index++) {
 				const localRecipes = [];
 				const cloudIds = []
